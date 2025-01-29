@@ -1,0 +1,157 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<link rel="stylesheet" href="../static/styles-home.css" />
+<link rel="stylesheet" href="../static/styles.css">
+<section id="hero" class="container-fluid px-0">
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active h100">
+        <img src="/static/images/Banner Home.png" alt="Banner" class="d-none d-md-block h-100">
+        <img src="/static/images/homeTuristaMobile.png" alt="Banner" class="d-block d-md-none h50vh">
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="container-fluid px-0 mt-5 row">
+  <h2 class="section-title text-center title-home mb-4">Top 10 !</h2>
+  <div class="row-scroll-wrapper position-relative">
+    <button class="arrow arrow-left">&#8249;</button>
+    <div class="row-scroll d-flex ps-6 overflow-auto w-100">
+      {% for card in Top10 %}
+      <div class="container home-10 mb-4 flex-shrink-0" style="background-image: url('{{ card[4] }}');">
+        <a href="/detalhes/{{ card[0] }}" class="text-decoration-none">
+          <div class="d-flex align-items-end h-100">
+            <div class="card card-top10 w-auto ms-1 mb-3 p-3">
+              <h2 class="top10 m-0">{{ card[1] }}</h2>
+              <div class="row">
+                {% if not card[5] %}
+                  <p class="top10">(Sem Avaliações)</p>
+                {% else %}
+                <div class="star-rating">
+                  {% for star in range(1, 6) %}
+                  <span class="star {% if star <= card[5]|round(0) %}filled{% endif %}">★</span>
+                  {% endfor %}
+                </div>
+                {% endif %}
+                <div>
+                  <p class="top10 m-0">{{ card[2] | format_date }} às {{ card[3] | format_hour_minute }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="arrow arrow-right">&#8250;</button>
+  </div>
+</section>
+
+
+<div class="container d-flex justify-content-center">
+  <div class="row col-12 justify-content-center home-1 mt-3">
+    <div class="section-title text-center title-home mt-4">Seus futuros momentos!</div>
+    <div class="row mt-4">
+      {% for agendamento in agendamentos %}
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          <div class="card-img-wrapper position-relative">
+            <a href="/detalhes/{{ agendamento[0] }}">
+              <div id="carousel{{ agendamento[0] }}" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner imgCard">
+                  {% for img_path in agendamento[14].split(",") %}
+                  <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                    <img src="{{ img_path.strip() }}" class="d-block" alt="Imagem do Passeio">
+                  </div>
+                  {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ agendamento[0] }}"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ agendamento[0] }}"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Próximo</span>
+                </button>
+              </div>
+            </a>
+          </div>
+          <div class="card-body ps-0">
+            <h2 class="m-0">{{ agendamento[3] }}</h2>
+              {% if agendamento[15] is none %}
+                <p class="text-muted"><strong>Sem avaliação</strong></p>
+              {% else %}
+                <div class="star-rating">
+                  {% for star in range(1, 6) %}
+                    <span class="star {% if star <= agendamento[15]|round(0) %}filled{% endif %}">★</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            <div class="d-flex justify-content-between">
+              <div>
+                <p class="card-text m-0">{{ agendamento[8] }}</p>
+                <p class="card-text m-0">{{ agendamento[11] | format_date }}</p>
+                <p class="card-text m-0">{{ agendamento[12] | format_hour_minute}}</p>
+              </div>
+              <div class="d-flex flex-row">
+                <p>R$</p>
+                <h4 class="fs-3"><strong> {{ "%.2f"|format(agendamento[7]) }}</strong></h4>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const rowScroll = document.querySelector(".row-scroll");
+  const arrowLeft = document.querySelector(".arrow-left");
+  const arrowRight = document.querySelector(".arrow-right");
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  rowScroll.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX - rowScroll.offsetLeft;
+    scrollLeft = rowScroll.scrollLeft;
+  });
+
+  rowScroll.addEventListener("mouseleave", () => {
+    isDown = false;
+  });
+
+  rowScroll.addEventListener("mouseup", () => {
+    isDown = false;
+  });
+
+  rowScroll.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - rowScroll.offsetLeft;
+    const walk = (x - startX) * 2;
+    rowScroll.scrollLeft = scrollLeft - walk;
+  });
+
+  arrowLeft.addEventListener("click", () => {
+    rowScroll.scrollLeft -= 1110;
+  });
+
+  arrowRight.addEventListener("click", () => {
+    rowScroll.scrollLeft += 1110;
+  });
+</script>
+
+{% endblock %}

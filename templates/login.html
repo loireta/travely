@@ -1,0 +1,67 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<link rel="stylesheet" href="../static/styles-login.css">
+<link rel="stylesheet" href="../static/styles.css">
+
+<div class="container">
+    <div class="row h-100 justify-content-between align-items-center">
+        <a href="/" class="d-none d-md-flex text-decoration-none"><svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+        </svg><h4 class="ms-2"><strong>Home</strong></h4></a>
+        <div class="row col-md-6 d-none d-md-flex align-items-center justify-content-center">
+            <div class="d-block">
+                <img src="/static/images/Logo-Travely.png" alt="Logo Travely" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="row col-md-6 col-lg-4 px-3 pe-0 align-items-center">
+            <div class="login-container p-4">
+                <div>
+                    <h2 class="mb-2 text-center"><strong>Entrar</strong></h2>
+                    <hr class="mt-0">
+                </div>
+                <form action="/acesso" method="post" class="">
+                    {% if msg %}
+                    <h2 style="color: red;">{{ msg }}</h2>
+                    {% endif %}
+                    <div class="">
+                        <div class="mb-2">
+                            <input type="text" name="usuario" id="usuario" class="form-control rounded-3"
+                                placeholder="Nome de Usuário" required>
+                        </div>
+                        <div class="mb-2">
+                            <input type="password" name="senha" id="senha" class="form-control rounded-3"
+                                placeholder="Senha" required>
+                        </div>
+                        <div class="col-12 p-1">
+                            <button class="btn btn-success w-75 rounded-3" type="submit">
+                                <p class="m-0"><strong>Login</strong></p>
+                            </button>
+                        </div>
+                </form>
+                
+                <div class="mt-4">
+                    <h3 class="mb-2 text-center"><strong>Cadastre-se</strong></h3>
+                    <hr class="mt-0">
+                </div>
+                
+                <div class="row ">
+                    <div class="col-6 p-1">
+                        <button class="btn btn-success w-100 rounded-3" type="button" onclick="window.location.href='/cadGuia';">
+                            <p class="m-0"><strong>Sou um Guia</strong></p>
+                        </button>
+                    </div>
+                    <div class="col-6 p-1">
+                        <button class="btn btn-success w-100 rounded-3" type="button"
+                            onclick="window.location.href='/cadTurista';">
+                            <p class="m-0"><strong>Sou um Turista</strong></p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

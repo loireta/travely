@@ -1,0 +1,101 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="../static/styles-cadGuia.css">
+
+<div class="container mt-5">
+    <div class="formContent row justify-content-center">
+        <div class="col-md-8">
+            <div class="btnVoltar">
+                <a href="/login" class="text-decoration-none d-flex" id="adc">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="textCad bi bi-arrow-left me-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                    </svg>
+                
+                    <h2 class="mb-4">Cadastro do Guia</h2>
+                </a>
+            </div>
+            <form action="/cadastrarGuia" method="POST" enctype="multipart/form-data">
+                <h4 class="mb-3 ps-5">1. Dados Pessoais</h4>
+                <div class="d-flex flex-column align-items-center">
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control needs-validation" name="nome" placeholder="Nome Completo"
+                            required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="cpf_cnpj" placeholder="CPF/CNPJ" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="telefone" placeholder="+55 (99) 99999-9999"
+                            required>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <input type="date" class="form-control" name="data_nascimento" placeholder="Data Nascimento"
+                            required>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <label for="imagem">Adicione uma foto:</label>
+                        <input class="form-control" type="file" name="imagem" id="imagem" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="cadastur" placeholder="Cadastur" required>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <input type="text" class="form-control" name="chavePix" placeholder="Chave Pix" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="cep" placeholder="CEP" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="cidadeEndUser" placeholder="Cidade" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="estadoEndUser" placeholder="Estado" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="bairroEndUser" placeholder="Bairro" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="ruaEndUser" placeholder="Rua" required>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <input type="number" class="form-control" name="numEndUser" placeholder="Número" required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="email" class="form-control" name="confirmar_email" placeholder="Confirmar email"
+                            required>
+                    </div>
+                </div>
+
+                <h4 class="mb-3 ps-5">3. Privacidade</h4>
+                <div class="d-flex flex-column align-items-center mb-3">
+                    <div class="mb-2  col-md-6">
+                        <input type="password" class="form-control" name="senha" placeholder="Senha" required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <input type="password" class="form-control" name="confirmar_senha" placeholder="Confirmar senha"
+                            required>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column align-items-center">
+                    <div class="alert alert-info col-md-6">
+                        As senhas devem ter no mínimo 8 caracteres e pelo menos duas das seguintes opções: letras
+                        maiúsculas, letras minúsculas, números e símbolos.
+                    </div>
+
+                    <div class="text-center mb-5 col-md-6">
+                        <button type="submit" class="btnGeral btn btn-success col-md-12">Cadastrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

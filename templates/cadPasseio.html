@@ -1,0 +1,62 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4">
+                <form action="/cadPasseio" method="post" enctype="multipart/form-data">
+                    <h2>Cadastro de Novo Passeio</h2>
+
+                    <div class="mb-3">
+                        <label for="nome">Nome do Passeio:</label>
+                        <input class="form-control" type="text" name="nome" id="nome" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="estadoPasseio">Estado:</label>
+                        <input class="form-control" type="text" name="estadoPasseio" id="estadoPasseio" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cidadePasseio">Cidade:</label>
+                        <input class="form-control" type="text" name="cidadePasseio" id="cidadePasseio" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="bairroEndPasseio">Bairro:</label>
+                        <input class="form-control" type="text" name="bairroEndPasseio" id="bairroEndPasseio" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="valor">Valor:</label>
+                        <input class="form-control" type="number" name="valor" id="valor" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <select class="form-control" id="categoria" name="categoria" required>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria[0] }}">{{ categoria[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descricao">Descrição do Passeio:</label>
+                        <input class="form-control" type="text" name="descricao" id="descricao" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imagem">Imagem do Passeio:</label>
+                        <input class="form-control" type="file" name="imagem" id="imagem" multiple>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-success w-100" type="submit">Cadastrar Passeio</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

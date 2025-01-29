@@ -1,0 +1,40 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<link rel="stylesheet" href="../static/styles-editPasseio.css">
+
+<div id="editarPasseio">
+    <h2>Editar o passeio</h2>
+
+    <form action="/{{ passeio[0] }}/editadoPasseio" method="POST">
+
+        <label for="nome">Nome passeio:</label><br>
+        <input class="iptCadastrar" type="text" name="nome" id="nome" placeholder="{{ passeio[1] }}" value="{{ passeio[1] }}" required><br><br>
+
+        <label for="estadoPasseio">Estado:</label><br>
+        <input class="iptCadastrar" type="text" name="estadoPasseio" id="estadoPasseio" placeholder="{{ passeio[2] }}" value="{{ passeio[2] }}" required><br><br>
+
+        <label for="cidadePasseio">Cidade:</label><br>
+        <input class="iptCadastrar" type="text" name="cidadePasseio" id="cidadePasseio" placeholder="{{ passeio[3] }}" value="{{ passeio[3] }}" required><br><br>
+
+        <label for="bairroEndPasseio">Bairro:</label><br>
+        <input class="iptCadastrar" type="text" name="bairroEndPasseio" id="bairroEndPasseio" placeholder="{{ passeio[4] }}" value="{{ passeio[4] }}" required><br><br>
+
+        <label for="qtdPessoas">Quantidade de pessoas:</label><br>
+        <input class="iptCadastrar" type="number" min="0" max="5" step="1" name="qtdPessoas" id="qtdPessoas" placeholder="{{ passeio[5] }}" value="{{ passeio[5] }}" required><br><br>
+
+        <label for="valor">Valor:</label><br>
+        <input class="iptCadastrar" type="number" name="valor" id="valor" placeholder="{{ passeio[6] }}" value="{{ passeio[6] }}" required><br><br>
+
+        <label for="tempoPasseio">Tempo passeio (min):</label><br>
+        <input class="iptCadastrar" type="number" name="tempoPasseio" id="tempoPasseio" placeholder="{{ passeio[7] }}" value="{{ passeio[7] }}" required><br><br>
+
+        <label for="descricao">Descreva mais informações o passeio:</label><br>
+        <input class="iptCadastrar" type="text" name="descricao" id="descricao" placeholder="{{ passeio[9] }}" value="{{ passeio[9] }}" required></input><br>
+        
+        <!-- Botão de submissão dentro do formulário -->
+        <button class="btnCadastrar" type="submit">Editar Passeio</button>
+    </form>
+    <!-- Formulário termina aqui -->
+
+</div>
+{% endblock %}

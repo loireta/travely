@@ -1,0 +1,114 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+
+<link rel="stylesheet" href="../static/styles-cadTurista.css">
+
+<div class="container mt-5">
+    <a href="/login" class="text-decoration-none" id="adc">
+        <h2 class="mb-4">< Cadastro de Turista</h2>
+    </a>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form action="/cadastrarTurista" method="POST" id="cadTuristaForm" onsubmit="return validateForm();">
+                <h4 class="mb-3 ps-5">1. Dados Pessoais</h4>
+                <div class="d-flex flex-column align-items-center">
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome">
+                        <span id="nomeError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="cpf_cnpj" id="cpf_cnpj" placeholder="CPF/CNPJ">
+                        <span id="cpfCnpjError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="telefone" id="telefone" placeholder="+55 Número do telefone">
+                        <span id="telefoneError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <input type="date" class="form-control" name="data_nascimento" id="data_nascimento" placeholder="Data Nascimento">
+                        <span id="dataNascimentoError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="cep" id="cep" placeholder="CEP">
+                        <span id="cepError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="cidadeEndUser" id="cidadeEndUser" placeholder="Cidade">
+                        <span id="cidadeEndUserError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="estadoEndUser" id="estadoEndUser" placeholder="Estado">
+                        <span id="estadoEndUser" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="bairroEndUser" id="bairroEndUser" placeholder="Bairro">
+                        <span id="bairroEndUserError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" name="ruaEndUser" id="ruaEndUser" placeholder="Rua">
+                        <span id="ruaEndUserError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <input type="number" class="form-control" name="numEndUser" id="numEndUser" placeholder="Número">
+                        <span id="numEndUserError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                        <span id="emailError" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="email" class="form-control" name="confirmar_email" id="confirmar_email" placeholder="Confirmar email">
+                        <span id="confirmarEmailError" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <h4 class="mb-3 ps-5">3. Privacidade</h4>
+                <div class="d-flex flex-column align-items-center mb-3">
+                    <div class="mb-2  col-md-6">
+                        <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
+                        <span id="senhaError" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha" placeholder="Confirmar senha">
+                        <span id="confirmarSenhaError" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column align-items-center">
+                    <div class="alert alert-info col-md-6">
+                        As senhas devem ter no mínimo 8 caracteres e pelo menos duas das seguintes opções: letras maiúsculas, letras minúsculas, números e símbolos.
+                    </div>
+
+                    <div class="text-center mb-5 col-md-6">
+                        <button type="submit" class="btn btn-success col-md-12">Cadastrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+        const fields = [
+            "nome", "cpf_cnpj", "telefone", "data_nascimento", 
+            "cep", "cidadeEndUser", "bairroEndUser", "ruaEndUser", 
+            "numEndUser", "email", "confirmar_email", "senha", "confirmar_senha"
+        ];
+
+        fields.forEach(field => {
+            const input = document.getElementById(field);
+            const errorSpan = document.getElementById(field + "Error");
+            errorSpan.textContent = "";
+            if (input.value.trim() === "") {
+                errorSpan.textContent = "* Campo obrigatório";
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+</script>
+
+{% endblock %}

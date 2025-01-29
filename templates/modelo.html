@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles-modelo.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <link rel="shortcut icon" type="imagex/png" href="../static/images/icon-_1_.ico">
+
+    <title>Travely</title>
+</head>
+
+<body>
+    <div id="loader">
+        <video id="splashVideo" autoplay loop muted>
+            <source src="{{ url_for('static', filename='video/SPLASH_TRAVELY_1.mp4') }}" type="video/mp4">
+            Seu navegador não suporta o vídeo.
+        </video>
+    </div>
+
+
+
+    <header>
+        <div class="d-flex align-items-center ms-2">
+            <button id="toggle-btn" class="toggle-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor"
+                    class="bi bi-list buton-sidebar" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                </svg>
+            </button>
+        </div>
+        <div class="logo text-center w-100 mt-1">
+            {% if tipo %}
+            <a href="/homeGuia">
+                <img class="logo-img" src="../static/images/logo.png">
+            </a>
+            {% else %}
+            <a href="/">
+                <img class="logo-img" src="../static/images/logo.png">
+            </a>
+            {% endif %}
+            
+        </div>
+
+        <div class="d-flex align-items-center me-2">
+            <button id="search-btn" class="toggle-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="1.75rem" fill="currentColor" class="bi bi-search me-1"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                </svg>
+            </button>
+        </div>
+
+        
+
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="searchModalLabel">Pesquisar Passeios</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body justify-content-center row">
+                        <input id="search-input" type="text" class="form-control w-75" placeholder="Pesquisar passeios...">
+                        <button id="search-submit" class="btn btn-success col-2 ms-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor" class="bi bi-search"
+                            viewBox="0 0 16 16">
+                                <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </header>
+
+
+    <section>
+        <div id="sidebar" class="sidebar row align-items-start flex-column">
+
+            {% if tipo %}
+            <ul class="nav nav-pills flex-column mb-auto p-0 w-100">
+                <li class="nav-item">
+                    <a href="/adm" class="nav-link  link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" fill="currentColor"
+                            class="bi bi-map me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
+                        </svg>
+                        Meus Passeios
+                    </a>
+                </li>
+                <li>
+                    <a href="/listaPasseios" class="nav-link link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" fill="currentColor"
+                            class="bi bi-calendar-event me-2" viewBox="0 0 16 16">
+                            <path
+                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                        </svg>
+                        Meus Agendamentos
+                    </a>
+                </li>
+                <li>
+                    <a href="/sobrenos" class="nav-link link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem" fill="currentColor"
+                            class="bi bi-info-lg me-2" viewBox="0 0 16 16">
+                            <path
+                                d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0" />
+                        </svg>
+                        Sobre Nós
+                    </a>
+                </li>
+            </ul>
+            {% else %}
+            <ul class="nav nav-pills flex-column mb-auto p-0 w-100">
+                {% if idUsuario is none %}
+                <li>
+                    <a href="/login" class="nav-link link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem" fill="currentColor"
+                            class="bi bi-box-arrow-in-right me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+                            <path fill-rule="evenodd"
+                                d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                        </svg>
+                        Fazer Login
+                    </a>
+                </li>
+                <li>
+                    <a href="/sobrenos" class="nav-link link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem" fill="currentColor"
+                            class="bi bi-info-lg me-2" viewBox="0 0 16 16">
+                            <path
+                                d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0" />
+                        </svg>
+                        Sobre Nós
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/listaPasseios" class="nav-link link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" fill="currentColor"
+                            class="bi bi-calendar-event me-2" viewBox="0 0 16 16">
+                            <path
+                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                        </svg>
+                        Meus Agendamentos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/historico" class="nav-link link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem" fill="currentColor"
+                            class="bi bi-calendar-check me-2" viewBox="0 0 16 16">
+                            <path
+                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                        </svg>
+                        Meus Historicos
+                    </a>
+                </li>
+                <li>
+                    <a href="/sobrenos" class="nav-link link-dark align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem" fill="currentColor"
+                            class="bi bi-info-lg me-2" viewBox="0 0 16 16">
+                            <path
+                                d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0" />
+                        </svg>
+                        Sobre Nós
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+            <div class="p-0 w-100">
+                <hr class="m-0">
+                {% if nomeLogado %}
+                <div class="dropup">
+                    <a href="#"
+                        class="d-flex justify-content-between align-items-center text-dark text-decoration-none dropdown-toggle p-0 ps-2 pb-2"
+                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if imgUsuario %}
+                        <img src="{{ imgUsuario[0] }}"
+                            class="border-foto-guia-sb rounded-circle mt-2 ms-2 me-2 foto-sidebar"
+                            alt="Foto de {{ idUsuario }}">
+                        {% else %}
+                        <img src="../static/images/sem_foto.png"
+                            class="border-foto-guia-sb rounded-circle mt-2 ms-2 me-2 foto-sidebar"
+                            alt="Foto de {{ idUsuario }}">
+                        {% endif %}
+                        <div class="w-100 text-start">
+                            <p class="m-0 me-2"><strong>{{ nomeLogado[0] }}</strong></p>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow p-0 me-1" aria-labelledby="dropdownUser1">
+                        <li class="m-0"><a class="dropdown-item"
+                                href="/perfilUsuario/{{ idUsuario }}"><strong>Perfil</strong></a></li>
+                        <li>
+                            <hr class="dropdown-divider m-0">
+                        </li>
+                        <li class="m-0"><a class="SairSide dropdown-item text-danger"
+                                href="/logout"><strong>Sair</strong></a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <div>
+                    <a href="/login"
+                        class="d-flex justify-content-between align-items-center text-dark text-decoration-none p-0 ps-2 pb-2">
+                        <img src="../static/images/sem_foto.png"
+                            class="border-foto-guia-sb rounded-circle mt-2 ms-2 me-2 foto-sidebar"
+                            alt="Foto de {{ idUsuario }}">
+                        <div class="w-100 text-start">
+                            <p class="m-0 me-2"><strong>Fazer login</strong></p>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <main>
+        {% block conteudo %}
+
+        {% endblock %}
+    </main>
+
+    <footer class="mt-3">
+        <hr class="m-0">
+        <div class="footer container">
+            <div class="row">
+                        <div class="row p-2">
+                            <p class="ps-1 col-6 m-0 text-start">Travely Ltda.</p>
+                            <p class="col-6 m-0 text-end">© 2024 TCC Etec, Inc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const splashVideo = document.getElementById('splashVideo');
+            const loader = document.getElementById('loader');
+            const content = document.getElementById('content');
+
+            splashVideo.onended = function () {
+                loader.style.display = 'none';
+                content.style.display = 'block';
+            };
+
+            setTimeout(function () {
+                loader.style.display = 'none';
+                content.style.display = 'block';
+            }, 2500);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButton = document.getElementById('toggle-btn');
+            const sidebar = document.getElementById('sidebar');
+            toggleButton.addEventListener('click', function () {
+                sidebar.classList.toggle('active');
+            });
+            document.addEventListener('click', function (event) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickOnToggleButton = toggleButton.contains(event.target);
+                if (!isClickInsideSidebar && !isClickOnToggleButton && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchBtn = document.getElementById('search-btn');
+
+            const currentPage = window.location.pathname;
+
+            if (currentPage === '/' || currentPage === '/pesquisaPasseios') {
+                searchBtn.style.display = 'block';
+            } else {
+                searchBtn.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchBtn = document.getElementById('search-btn');
+            const searchSubmit = document.getElementById('search-submit');
+            const searchInput = document.getElementById('search-input');
+
+            const searchModal = new bootstrap.Modal(document.getElementById('searchModal'), {
+                backdrop: false,
+                keyboard: true
+            });
+
+            searchBtn.addEventListener('click', function () {
+                searchModal.show();
+                searchInput.focus();
+            });
+
+            searchSubmit.addEventListener('click', function () {
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = `/pesquisaPasseios?query=${encodeURIComponent(query)}`;
+                }
+            });
+
+            searchInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        window.location.href = `/pesquisaPasseios?query=${encodeURIComponent(query)}`;
+                    }
+                }
+            });
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

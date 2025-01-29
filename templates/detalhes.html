@@ -1,0 +1,274 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<link rel="stylesheet" href="../static/styles-detalhes.css">
+<link rel="stylesheet" href="../static/styles.css">
+
+<body>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="row gx-4 gx-lg-5 align-items-start">
+                <div class="col-md-6 px-0 h75vh">
+                    <div id="carouselPasseio" class="carousel slide h-100" data-bs-ride="false">
+                        <div class="carousel-inner-banner carousel-inner h-100" style="border-radius: 1rem;">
+                            {% for img in imgsPasseio %}
+                            <div class="carousel-item-banner carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                <img src="{{ img[2] }}" class="d-block w-100 h-100 carousel-image-banner carousel-image"
+                                    alt="Imagem do Passeio">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPasseio"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselPasseio"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Próximo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h1 class="display-5 fw-bolder m-0">{{ agendamento[3] }}</h1>
+                    {% if not media_estrelas %}
+                    <p class="text-muted">Sem Avaliações</p>
+                    {% else %}
+                    <div class="star-rating">
+                        {% for star in range(1, 6) %}
+                        <span class="star {% if star <= media_estrelas|round(0) %}filled{% endif %}">★</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="lead mb-2">
+                        <p><small>{{ agendamento[8] }}</small></p>
+                    </div>
+
+                    <hr>
+
+                    <div class="justify-content-start d-flex fs-5 my-4">
+                        <img src="{{ imgGuia[0] }}" class="imgGuia border p-1 rounded-circle" />
+                        <div class="ms-2 d-flex flex-column justify-content-center">
+                            <a href="/perfilUsuario/{{ agendamento[14] }}" class="text-decoration-none">
+                                <p class="ps-2 mb-0"><strong>Guia:</strong> {{ guia[1] }}</p>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="mb-5">
+                        <div class="">
+                            <p class="lead"><strong>Endereço:</strong> {{ agendamento[6] }} - {{ agendamento[5] }} / {{
+                                agendamento[4] }}</p>
+                            <p class="lead"><strong>Data:</strong> {{ agendamento[11] | format_date }} às {{
+                                agendamento[12] | format_hour_minute }} </p>
+                            <p class="lead"><strong>Duração:</strong> {{ agendamento[13] }} horas</p>
+                        </div>
+                        <div class="lead lh-sm " id="text">{{ agendamento[9] }}</div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row justify-content-end">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <form method="POST" action="/detalhes/{{ agendamento[0] }}"
+                                    class="d-flex align-items-center justify-content-end">
+                                    <div class="input-group">
+                                        <select class="form-control text-center" name="qtdTurAg" id="qtdTurAg"
+                                            onchange="this.form.submit()">
+                                            {% for i in range(1, agendamento[10] + 1) %}
+                                            <option value="{{ i }}" {% if qtdTurAg==i %} selected {% endif %}>{{ i }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <span class="input-group-text">Turistas</span>
+                                    </div>
+
+
+
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0 ms-2 me-2">x R$ {{ "%.2f"|format(valor) }}</p>
+                                        <h5 class="mb-0">= R$ {{ "%.2f"|format(total) }}</h5>
+                                    </div>
+                                </form>
+                            </div>
+                            {% if tipo == 0 %}
+                            <a href="/confirmaPag/{{ agendamento[0] }}"
+                                class="btn btn-outline-success flex-shrink-0 d-flex justify-content-center align-items-center rounded-pill w-50 mt-3">
+                                Agendar Já!
+                            </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="row">
+                    <h4 class="col-10 text-start">Avaliações do Passeio</h4>
+                    <hr>
+                </div>
+
+                <div class="row col-12 mb-3 justify-content-around">
+                    {% if avaliacoes %}
+                    {% for avaliacao in avaliacoes[:3] %}
+                    <div class="col-12 col-md-4 mt-3">
+                        <div class="card card_avaliacao p-1">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    {% if avaliacao[6] %}
+                                    <img src="{{ avaliacao[6] }}"
+                                        class="imgAvaliacao borderAvaliacao rounded-circle col-4" />
+                                    {% else %}
+                                    <img src="../static/images/sem_foto.png"
+                                        class="imgAvaliacao borderAvaliacao rounded-circle col-4" />
+                                    {% endif %}
+                                    <div class="row align-items-center ms-2">
+                                        <div class="row">
+                                            <a href="/perfilUsuario/{{ avaliacao[7] }}"
+                                                class="text-decoration-none text-start col-6">
+                                                <p class="card-title m-0">{{ avaliacao[3] }}</p>
+                                            </a>
+                                            <p class="card-subtitle mb-2 text-muted text-start m-0 col-6 text-end">
+                                                <small>{{ avaliacao[0] | format_date }}</small>
+                                            </p>
+                                        </div>
+                                        <p class="card-subtitle mb-2 text-muted text-start "><small>{{ avaliacao[4] }},
+                                                {{
+                                                avaliacao[5] }}</small></p>
+                                    </div>
+
+                                </div>
+                                <div class="star-rating">
+                                    {% for star in range(1, 6) %}
+                                        <span class="star {% if star <= avaliacao[2]|round(0) %}filled{% endif %}">★</span>
+                                    {% endfor %}
+                                </div>
+
+                                <hr>
+                                <div class="card-text lead" id="text">{{ avaliacao[1] }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div
+                        class="row h-65 flex-column justify-content-center align-items-center flex-nowrap text-secondary h-65">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" fill="currentColor"
+                            class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                        </svg>
+                        <h5 class="text-center mt-1 ">
+                            <strong>Sem Avaliações</strong>
+                        </h5>
+                    </div>
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="row">
+                    <h4 class="col-10 text-start">Mais passeios</h4>
+                    <hr>
+                </div>
+                <div class="row mt-3">
+                    {% for agendamento in maisAgendamentos[:4] %}
+                    <div class="col-md-3 mb-4">
+                        <div class="card card-border-0">
+                            <div class="card-img-wrapper position-relative">
+                                <a href="/detalhes/{{ agendamento[0] }}">
+                                    <div id="carousel{{ agendamento[0] }}" class="carousel slide"
+                                        data-bs-ride="carousel">
+                                        <div class="carousel-inner imgCard">
+                                            {% for img_path in agendamento[14].split(",") %}
+                                            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                                <img src="{{ img_path.strip() }}" class="d-block h-100"
+                                                    alt="Imagem do Passeio">
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carousel{{ agendamento[0] }}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Anterior</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carousel{{ agendamento[0] }}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Próximo</span>
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body ps-0">
+                                <h2 class="m-0">{{ agendamento[3] }}</h2>
+                                {% if agendamento[15] is none %}
+                                <p class="text-muted"><strong>Sem avaliação</strong></p>
+                                {% else %}
+                                <div class="star-rating">
+                                    {% for star in range(1, 6) %}
+                                    <span
+                                        class="star {% if star <= agendamento[15]|round(0) %}filled{% endif %}">★</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="card-text m-0">{{ agendamento[8] }}</p>
+                                        <p class="card-text m-0">{{ agendamento[11] | format_date }}</p>
+                                        <p class="card-text m-0">{{ agendamento[12] | format_hour_minute}}</p>
+                                    </div>
+                                    <div class="d-flex flex-row">
+                                        <p>R$</p>
+                                        <h4 class="fs-3"><strong> {{ "%.2f"|format(agendamento[7]) }}</strong></h4>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const truncateText = (element, lineCount) => {
+            const lineHeight = parseFloat(window.getComputedStyle(element).lineHeight);
+            const maxHeight = lineHeight * lineCount;
+
+            let originalText = element.innerText.trim();
+
+            element.style.maxHeight = `${maxHeight}px`;
+            element.style.overflow = "hidden";
+
+            if (element.scrollHeight > maxHeight) {
+                while (element.scrollHeight > maxHeight) {
+                    originalText = originalText.substring(0, originalText.length - 1);
+                    element.innerText = `${originalText.trim()}...`;
+                }
+            }
+        };
+
+        const leadElement = document.getElementById('text');
+        truncateText(leadElement, 3);
+    });
+</script>
+
+{% endblock %}

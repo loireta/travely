@@ -1,0 +1,179 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<link rel="stylesheet" href="../static/confirmaPag.css">
+<link rel="stylesheet" href="../static/styles.css">
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-around">
+        <div>
+            <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
+                <h5 class="mb-0 p-5">Confirmar Pagamento</h5>
+            </a>
+        </div>
+        <div class="col-md-4 d-none d-md-block">
+            <div class="card p-3 shadow-sm" style="border-radius: 1rem;">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ agendamento[15] }}" alt="Imagem Passeio" class="me-3 rounded imgPasseio">
+                    <div>
+                        <h6 class="mb-0">{{ agendamento[3] }}</h6>
+                        <p class="text-muted mb-0">{{ agendamento[5] }} - {{ agendamento[4] }}
+                        </p>
+                        {% if not media_estrelas %}
+                        <p class="text-muted">Sem Avaliações</p>
+                        {% else %}
+                        <div class="star-rating">
+                            {% for star in range(1, 6) %}
+                            <span class="star {% if star <= media_estrelas|round(0) %}filled{% endif %}">★</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <h6>Informações de preço</h6>
+                <ul class="list-unstyled">
+                    <li class="d-flex justify-content-between">
+                        <span>R$ {{ "%.2f"|format(agendamento[7]) }} x {{ qtdTurAg }} pessoa</span>
+                        <span>R$ {{ "%.2f"|format(total) }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                        <span>Taxa Travely (%5)</span>
+                        <span>R$ {{ "%.2f"|format(total * 0.05) }}</span>
+                    </li>
+                </ul>
+
+                <hr>
+
+                <div class="d-flex justify-content-between">
+                    <strong>Valor total:</strong>
+                    <strong>R$ {{ "%.2f"|format(total * 1.05) }}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 mt-4 justify-content-center">
+            <form method="POST" action="/confirmaPag/{{ agendamento[0] }}" class="">
+                <div class="mb-3">
+                    <h4>Seu agendamento</h4>
+                    <hr>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <p class="mb-0 align-items-center">Turistas</p>
+                        <select class="form-control text-center " style="max-width: 3rem" name="qtdTurAg" id="qtdTurAg"
+                            onchange="this.form.submit()">
+                            {% for i in range(1, agendamento[10] + 1) %}
+                            <option value="{{ i }}" {% if qtdTurAg==i %} selected {% endif %}>{{ i }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <hr>
+                </div>
+
+                <div class="d-md-none mt-4 ">
+                    <div class="card p-3 shadow-sm" style="border-radius: 1rem;">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ agendamento[15] }}" alt="Imagem Passeio" class="me-3 rounded imgPasseio">
+                            <div>
+                                <h6 class="mb-0">{{ agendamento[3] }}</h6>
+                                <p class="text-muted mb-0">{{ agendamento[5] }} - {{
+                                    agendamento[4] }}</p>
+                                {% if not media_estrelas %}
+                                <p class="text-muted">Sem Avaliações</p>
+                                {% else %}
+                                <div class="star-rating">
+                                    {% for star in range(1, 6) %}
+                                    <span
+                                        class="star {% if star <= media_estrelas|round(0) %}filled{% endif %}">★</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <h6>Informações de preço</h6>
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between">
+                                <span>R$ {{ "%.2f"|format(agendamento[7]) }} x {{ qtdTurAg }} pessoa</span>
+                                <span>R$ {{ "%.2f"|format(total) }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <span>Taxa Travely (%5)</span>
+                                <span>R$ {{ "%.2f"|format(total * 0.05) }}</span>
+                            </li>
+                        </ul>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <strong>Valor total:</strong>
+                            <strong>R$ {{ "%.2f"|format(total * 1.05) }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div>
+                <h4 class="my-4 ">Pagar com pix!</h4>
+                <div class="d-flex flex-column align-items-center d-block d-lg-none">
+                    <img src="../static/images/qr-code-148732_1280.pnj.webp" alt="QR Code Pix" class="img-fluid w-75 ">
+                </div>
+                <div class="d-flex flex-column align-items-start d-none d-lg-block">
+                    <img src="../static/images/qr-code-148732_1280.pnj.webp" alt="QR Code Pix"
+                        class="img-fluid w-25 p-2">
+                </div>
+            </div>
+
+            <div>
+                <h4 class="my-4 ">Necessário para sua viagem</h4>
+                <div class="mb-4">
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Foto do perfil</strong>
+                            <p class="mb-0 text-muted">Para sua segurança.</p>
+                        </div>
+                        <button class="btn btn-outline-secondary">Adicionar</button>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Número de telefone</strong>
+                            <p class="mb-0 text-muted">Adicione seu número de telefone.</p>
+                        </div>
+                        <button class="btn btn-outline-secondary">Adicionar</button>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <div>
+                <div class="mb-4">
+                    <h6>Política de cancelamento</h6>
+                    <p class="mb-0 text-muted">Este passeio não é reembolsável. <a href="#">Saiba mais</a></p>
+                </div>
+                <div class="mb-4">
+                    <h6>Regras básicas</h6>
+                    <p class="mb-0 text-muted">Pedimos a todos os turistas que se lembrem de alguns pequenos
+                        detalhes
+                        que os tornam ótimos turistas.</p>
+                    <ul class="mb-0 text-muted">
+                        <li>Siga as Regras do passeio</li>
+                        <li>Trate bem o guia, ele irá te melhor atender.</li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <form action="/confirmarGrupoPasseio/{{ agendamento[0] }}/{{ qtdTurAg }}" method="POST">
+                <button type="submit" class="btn btn-success w-75">Efetuar Compra</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

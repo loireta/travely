@@ -1,0 +1,328 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<link rel="stylesheet" href="../static/styles.css">
+<link rel="stylesheet" href="../static/perfilUsuario.css">
+
+<div class="container mt-5">
+    <div class="row mt-4 justify-content-around p-3">
+        <div class="row col-12 col-md-3 card">
+            {% if imagem %}
+            <div class="col-12 text-center mt-4">
+                <img src="{{ imagem }}" class="card-img-top border-foto-guia rounded-circle p-1 w-75"
+                    alt="Foto de {{ usuario[1] }}">
+            </div>
+            {% else %}
+            <div class="col-12 text-center mt-4">
+                <img src="../static/images/sem_foto.png" class="card-img-top border-foto-guia rounded-circle p-1 w-75"
+                    alt="Foto de {{ usuario[1] }}">
+            </div>
+            {% endif %}
+
+            <div class="card-body">
+                <h4 class="m-0">{{ usuario[1]}}</h4>
+                {% if usuario[12] %}
+                <p class="m-0">Superguia</p>
+                {% else %}
+                <p class="m-0">Turista</p>
+                {% endif %}
+                {% if med_Estrelas and med_Estrelas[2] is not none %}
+                <div class="star-rating">
+                    {% for star in range(1, 6) %}
+                    <span class="star {% if star <= med_Estrelas[2]|round %}filled{% endif %}">★</span>
+                    {% endfor %}
+                </div>
+
+                <p class="m-0">{{ med_Estrelas[1] }} avaliações</p>
+                <p class="mb-2">{{ med_Estrelas[3] }} passeios disponíveis</p>
+                {% else %}
+                <div class="no-rating">
+                    <p class="m-0 text-muted mb-2">Nenhuma avaliação</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 col-md-8 mt-3">
+            <div class="row justify-content-between align-items-center">
+                <h3 class="w-auto">Sobre {{ usuario[1] }}</h3>
+                {% if idUsuario == idUsuarioTela %}
+                <a href="" class="w-auto p-0 pe-3" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.7rem" height="1.7rem" fill="currentColor"
+                        class="bi bi-pencil-square sucess" viewBox="0 0 16 16">
+                        <path
+                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd"
+                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                    </svg>
+                </a>
+                {% else %}
+                {% endif %}
+            </div>
+
+            <hr class="mt-0">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor"
+                    class="me-2 bi bi-briefcase" viewBox="0 0 16 16">
+                    <path
+                        d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
+                </svg><b>Trabalho em: </b>{{ adicional[1] }}</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor"
+                    class="me-2 bi bi-translate" viewBox="0 0 16 16">
+                    <path
+                        d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286zm1.634-.736L5.5 3.956h-.049l-.679 2.022z" />
+                    <path
+                        d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm7.138 9.995q.289.451.63.846c-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6 6 0 0 1-.415-.492 2 2 0 0 1-.94.31" />
+                </svg><b>Línguas:</b> {{ adicional[2] }}</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor"
+                    class="me-2 bi bi-globe-americas" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z" />
+                </svg><b>Vivo em:</b> {{ usuario[6] }}, {{ usuario[7] }}</p>
+
+            <div class="biografia">
+                <h4>Biografia de {{ usuario[1] }}:</h4>
+                <p class="descricao">{{ adicional[3] }}.</p>
+            </div>
+        </div>
+    </div>
+    {% if usuario[12] %}
+    <div class="row col-12 mb-3 justify-content-around">
+        <div class="row mt-4">
+            <h4 class="col-10 text-start">Avaliações</h4>
+            <hr>
+        </div>
+        {% if avaliacoes %}
+        {% for avaliacao in avaliacoes[:3] %}
+        <div class="col-12 col-md-4 mt-3">
+            <div class="card card_avaliacao p-1">
+                <div class="card-body">
+                    <div class="d-flex">
+                        {% if avaliacao[6] %}
+                        <img src="{{ avaliacao[6] }}" class="imgAvaliacao borderAvaliacao rounded-circle col-4" />
+                        {% else %}
+                        <img src="../static/images/sem_foto.png"
+                            class="imgAvaliacao borderAvaliacao rounded-circle col-4" />
+                        {% endif %}
+                        <div class="row align-items-center ms-2">
+                            <div class="row">
+                                <a href="/perfilUsuario/{{ avaliacao[7] }}"
+                                    class="text-decoration-none text-start col-6">
+                                    <p class="card-title m-0">{{ avaliacao[3] }}</p>
+                                </a>
+                                <p class="card-subtitle mb-2 text-muted text-start m-0 col-6 text-end">
+                                    <small>{{ avaliacao[0] | format_date }}</small>
+                                </p>
+                            </div>
+                            <p class="card-subtitle mb-2 text-muted text-start "><small>{{ avaliacao[4] }},
+                                    {{
+                                    avaliacao[5] }}</small></p>
+                        </div>
+
+                    </div>
+                    <div class="star-rating">
+                        {% for star in range(1, 6) %}
+                        <span class="star {% if star <= avaliacao[2]|round(0) %}filled{% endif %}">★</span>
+                        {% endfor %}
+                    </div>
+
+                    <hr>
+                    <div class="card-text lead" id="text">{{ avaliacao[1] }}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="row h-65 flex-column justify-content-center align-items-center flex-nowrap text-secondary h-65">
+            <svg xmlns="http://www.w3.org/2000/svg" width="6rem" height="6rem" fill="currentColor"
+                class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                <path
+                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+            </svg>
+            <h5 class="text-center mt-1 ">
+                <strong>Sem Avaliações</strong>
+            </h5>
+        </div>
+        {% endif %}
+    </div>
+    {% else %}
+    {% endif %}
+    <div class="container">
+        {% if usuario[12] %}
+        <h4 class="col-10 text-start">Agendamentos do {{ usuario[1] }}</h4>
+        {% else %}
+        <h4 class="col-10 text-start">Mais passeios</h4>
+        {% endif %}
+
+        <hr class="mt-0 mb-4">
+        <div class="row mt-3">
+            {% for agendamento in agendamentos[:4] %}
+            <div class="col-md-3 mb-4">
+                <div class="cardAgendamentos">
+                    <div class="card-img-wrapper position-relative">
+                        <a href="/detalhes/{{ agendamento[0] }}">
+                            <div id="carousel{{ agendamento[0] }}" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner imgCard">
+                                    {% for img_path in agendamento[14].split(",") %}
+                                    <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                        <img src="{{ img_path.strip() }}" class="d-block w-100" alt="Imagem do Passeio">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carousel{{ agendamento[0] }}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Anterior</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carousel{{ agendamento[0] }}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Próximo</span>
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card-body ps-0">
+                        <h2 class="m-0">{{ agendamento[3] }}</h2>
+                        {% if agendamento[15] is none %}
+                        <p class="text-muted"><strong>Sem avaliação</strong></p>
+                        {% else %}
+                        <div class="star-rating">
+                            {% for star in range(1, 6) %}
+                            <span class="star {% if star <= agendamento[15]|round(0) %}filled{% endif %}">★</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="card-text m-0">{{ agendamento[8] }}</p>
+                                <p class="card-text m-0">{{ agendamento[11]| format_date }}</p>
+                                <p class="card-text m-0">{{ agendamento[12] }}</p>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <p>R$</p>
+                                <h4 class="fs-3"><strong> {{ "%.2f"|format(agendamento[7]) }}</strong></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Editar Perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="usuario-tab" data-bs-toggle="tab" data-bs-target="#usuario"
+                            type="button" role="tab">Dados do Usuário</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="adusuario-tab" data-bs-toggle="tab" data-bs-target="#adusuario"
+                            type="button" role="tab">Dados Adicionais</button>
+                    </li>
+                </ul>
+                <div class="tab-content mt-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="usuario" role="tabpanel">
+                        <form action="/editUsuario/{{ idUsuario }}" method="POST" id="formEditUsuario" class="row">
+                            <div class="col-7 mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" name="nome" value="{{ usuario[1] }}"
+                                    placeholder="Nome">
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="dataNasc" class="form-label">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="dataNasc" name="dataNasc"
+                                    value="{{ usuario[4] }}">
+                            </div>
+                            <div class="col-7 mb-3">
+                                <label for="cpfCnpj" class="form-label">CPF/CNPJ</label>
+                                <input type="text" class="form-control" id="cpfCnpj" name="cpfCnpj"
+                                    value="{{ usuario[2] }}" placeholder="CPF/CNPJ">
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="numTelefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="numTelefone" name="numTelefone"
+                                    value="{{ usuario[3] }}" placeholder="Telefone">
+                            </div>
+
+                            <div class="col-7 mb-3">
+                                <label for="cepEndUser" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="cepEndUser" name="cepEndUser"
+                                    value="{{ usuario[5] }}" placeholder="CEP">
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="estadoEndUser" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="estadoEndUser" name="estadoEndUser"
+                                    value="{{ usuario[7] }}" placeholder="Estado">
+                            </div>
+                            <div class="col-7 mb-3">
+                                <label for="cidadeUser" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidadeUser" name="cidadeUser"
+                                    value="{{ usuario[6] }}" placeholder="Cidade">
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="bairroEndUser" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="bairroEndUser" name="bairroEndUser"
+                                    value="{{ usuario[8] }}" placeholder="Bairro">
+                            </div>
+
+                            <div class="col-7 mb-3">
+                                <label for="ruaEndUser" class="form-label">Rua</label>
+                                <input type="text" class="form-control" id="ruaEndUser" name="ruaEndUser"
+                                    value="{{ usuario[9] }}" placeholder="Rua">
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="numEndUser" class="form-label">Número</label>
+                                <input type="text" class="form-control" id="numEndUser" name="numEndUser"
+                                    value="{{ usuario[10] }}" placeholder="Número">
+                            </div>
+                            <button type="submit" class="btn btn-success w-50">Salvar</button>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="adusuario" role="tabpanel">
+                        <form action="/editAdUsuario/{{ idUsuario }}" method="POST" id="formEditAdUsuario"
+                            enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="trabalho" class="form-label">Trabalho</label>
+                                <input type="text" class="form-control" id="trabalho" name="trabalho"
+                                    value="{{ adicional[1] }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="lingua" class="form-label">Língua</label>
+                                <input type="text" class="form-control" id="lingua" name="lingua"
+                                    value="{{ adicional[2] }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagem" class="form-label">Foto Perfil</label>
+                                <input class="form-control" type="file" name="imagem" id="imagem" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <textarea class="form-control" id="descricao"
+                                    name="descricao">{{ adicional[3] }}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var myTab = new bootstrap.Tab(document.querySelector('#usuario-tab'))
+        myTab.show();
+    });
+</script>
+
+
+{% endblock %}
