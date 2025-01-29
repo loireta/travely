@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Vampiro+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+
+.carousel-inner img {
+    height: 100%!important;
+    object-fit: cover;
+}
+
+.card {
+    background-color: #ffffff;
+    border: none;
+}
+.card img {
+    border-radius: 5px;
+}
+.card-title {
+    font-size: 1rem;
+}
+.card-text {
+    font-size: 0.875rem;
+}
+.section-title {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    font-weight: bold;
+}
+.title-home{
+    font-size: 26px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    color: var(--cor-primaria);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}  
+
+.imgCard{
+    height: 50vh;
+    border-radius: 1rem;
+}
+
+.home-1 {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 2rem !important;
+}
+
+.h50vh{
+    height: 50vh !important;
+}
+.row-scroll-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.row-scroll {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    position: relative;
+    width: 100%;
+}
+
+.row-scroll::-webkit-scrollbar {
+    display: none; 
+}
+
+.row-scroll-wrapper .arrow {
+    display: none;
+}
+
+.row-scroll-wrapper:hover .arrow {
+    display: flex;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 6rem;
+    cursor: pointer;
+    z-index: 10;
+    height: 6rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.arrow-left {
+    left: 0.5rem;
+}
+
+.arrow-right {
+    right: 0.5rem;
+}
+
+.home-10 {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 2rem !important;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 1rem;
+}
+
+.top10{
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+}
+
+.card-top10{
+    background-color: #027368c0!important;
+}
+
+.star-rating{
+    direction: ltr!important;
+}
+
+@media (min-width: 768px) {
+    .home-10 {
+        width: 1114px !important;
+    }
+    .ps-6{
+        padding-left: 4rem;
+    }
+}
+
+.h100{
+    height: 100vh !important;
+}

@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Vampiro+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --cor-primaria: #027368; 
+    --cor-secundaria: #5E4333; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Istok', sans-serif;
+}
+
+.iptLogin{
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+#adc {
+    color: black;       
+}
+
+#adc:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    color: #027368;
+}
+
+.btnGeral {
+    margin-top: 20px;
+    padding: 8px;
+    background: #027368;
+    cursor: pointer;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    margin: 10px;
+    width: 150px;
+    text-decoration: none;
+}
+
+.btnGeral:hover{
+    background: #ffffff;
+    color: #01b19f;
+    border: solid 1px #027368;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.container {
+    padding-top: 70px;
+    padding-left: 140px;
+    margin-bottom: 40px;
+}
+
+.formContent {
+    border-radius: 20px;
+    max-width: 900px;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.textCad {
+    padding-left: 10px;
+    padding-top: 10x;
+    color: #027368;
+}
+
+.btnVoltar {
+    margin-top: 50px;
+}

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Vampiro+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+section{
+    width: 100%;
+}
+
+.h75vh{
+    height: 85vh;
+    object-fit: cover;
+}
+
+.imgGuia {
+    border: 4px solid var(--cor-primaria)!important;
+    object-fit: cover;
+    min-width: 6rem ;
+    min-height: 6rem ;
+    max-width: 6rem ;
+    max-height: 6rem ;
+}
+
+.card_avaliacao{
+    border-radius: 2rem;
+}
+
+.imgAvaliacao {
+    width: 4rem;
+    object-fit: cover;
+}
+
+.borderAvaliacao {
+    border: 2px solid var(--cor-primaria);
+}
+
+.carousel-inner-banner {
+    height: 100%;
+}
+
+.carousel-item-banner {
+    height: 100%;
+}
+
+.carousel-image-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.card-text {
+    font-size: 0.875rem;
+}
+
+.imgCard{
+    height: 50vh;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+.lead {
+    line-height: 1.5em;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-border-0{
+    border: 0!important;
+}

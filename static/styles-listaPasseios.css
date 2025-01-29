@@ -1,0 +1,160 @@
+@media (max-width: 768px) {
+    .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .card-img-top {
+        height: 13rem;
+    }
+}
+
+.row-scroll-wrapper {
+    position: relative;
+}
+
+.row-scroll {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    cursor: grab;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+.row-scroll::-webkit-scrollbar {
+    display: none; 
+}
+
+.row-scroll .card {
+    flex: 0 0 auto;
+    width: 18rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.container .card.selected {
+    border: 3px solid var(--cor-primaria) !important;
+    border-radius: 1rem;
+}
+
+.row-scroll .card {
+    width: 100%;
+}
+
+.info-section {
+    margin-top: 2rem;
+    display: none;
+}
+
+.info-section.active {
+    display: block;
+}
+
+.container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.row-scroll-wrapper {
+    position: relative;
+}
+
+.row-scroll-wrapper .arrow {
+    display: none;
+}
+
+.row-scroll-wrapper:hover .arrow {
+    display: flex;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 6rem;
+    cursor: pointer;
+    z-index: 10;
+    height: 6rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.arrow-left {
+    left: 0;
+}
+
+.arrow-right {
+    right: 0;
+}
+
+.vertical-divider {
+    border-left: 2px solid #e0e0e0; 
+    height: auto; 
+    margin: 0 15px; 
+}
+
+.extrato{
+    border-left: 2px solid #e0e0e0;
+}
+
+.custom-card {
+    border-radius: 0.5rem;
+}
+
+.btn-warning {
+    color: #ffffff !important;
+}
+
+.h-65 {
+    height: 65vh !important;
+}
+
+.row-m-0 {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.h-45{
+    height: 45vh;
+}
+
+.w-55{
+    width: 55% !important;
+}
+
+.border-foto-guia {
+    border: 4px solid var(--cor-primaria)!important;
+    object-fit: cover;
+    min-width: 7rem ;
+    min-height: 7rem ;
+    max-width: 7rem ;
+    max-height: 7rem ;
+}
+
+.img-g-calender{
+    width: 2rem;
+    height: 2rem;
+}
+
+.img-g-calender1{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0px !important;
+}
+
+.alert{
+    white-space: unset;
+    overflow:auto ;
+    text-overflow: unset;
+
+}

@@ -1,0 +1,10 @@
+.imgPasseio {
+    width: 40%;
+    height: 120px;;
+    object-fit: cover;
+}
+
+.star-rating {
+    font-size: 1.5rem !important;
+}
+

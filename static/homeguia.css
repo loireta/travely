@@ -1,0 +1,43 @@
+.section-container {
+    background-color: white;
+    color: var(--cor-primaria);
+}
+.content-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1rem;
+    background-color: white;
+}
+.content-wrapper {
+    padding: 40px;
+}
+.text-content {
+    font-size: 1.2rem;
+    color: #f1f1f1;
+}
+
+.h100 {
+    height: 100vh;
+}
+
+.texto{
+    white-space: unset;
+    overflow: unset;
+    text-overflow: unset;
+    color: black;
+}
+
+.title-home{
+    font-size: 26px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    white-space: unset;
+    overflow: unset;
+    text-overflow: unset;
+} 

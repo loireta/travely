@@ -1,0 +1,49 @@
+body {
+    background: url('../static/images/Fundo\ Travely.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-position:right center; 
+    }
+}   
+
+.login-container {
+    background-color: rgba(255, 255, 255); 
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+.container {
+    height: 100vh;
+ }
+
+p{
+    color: white!important;
+}
+p:hover{
+    color: var(--cor-primaria)!important;
+}
+
+header {
+    display: none !important; 
+}
+
+@media (max-width: 768px) {
+    header {
+        display: flex !important;
+    }
+}
+
+footer {
+    display: none !important; 
+}
+
+@media (max-width: 768px) {
+    footer {
+        display: flex !important;
+    }
+}

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Vampiro+One&display=swap');
+
+:root {
+    --cor-primaria: #027368; 
+    --cor-secundaria: #5E4333; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Istok', sans-serif;
+}
+
+.btnCadastrar {
+    background-color: #027368;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    margin-top: 12px;
+    margin-left: 30%;
+    transition: all 0.3s ease;
+}
+
+.btnCadastrar:hover{
+    background: #01b19f;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
+}
+
+.iptCadastrar {
+    width: 460px;
+    height: 30px;
+}
+
+#novopasseio {
+    width: 50%;
+    box-shadow: 0px 0px 100px #a4a4a4a4;
+    border-radius: 15px;
+    margin: 10px auto 0 auto;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#novopasseio form {
+    text-align: left;
+}

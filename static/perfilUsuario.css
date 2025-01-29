@@ -1,0 +1,87 @@
+.biografia,
+.avaliacoes,
+.passeios {
+    margin-top: 2rem;
+    width: 100%;
+}
+.passeio-card {
+    max-width: 18rem;
+}
+
+.border-foto-guia {
+    border: 4px solid var(--cor-primaria)!important;
+    object-fit: cover;
+}
+
+.imgAvaliacao {
+    width: 4rem;
+    object-fit: cover;
+}
+
+.borderAvaliacao {
+    border: 2px solid var(--cor-primaria);
+}
+
+.card_avaliacao{
+    border-radius: 2rem;
+}
+
+.card{
+    border-radius: 3rem;;
+}
+
+.descricao{
+    white-space: normal;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+}
+.cardAgendamentos {
+    background-color: #ffffff;
+    border: none;
+}
+
+.card img {
+    border-radius: 5px;
+}
+.card-title {
+    font-size: 1rem;
+}
+.card-text {
+    font-size: 0.875rem;
+}
+.section-title {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    font-weight: bold;
+}
+.title-home{
+    font-size: 26px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    color: var(--cor-primaria);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}  
+
+.imgCard{
+    height: 50vh;
+    border-radius: 1rem;
+}
+
+.border-foto-guia {
+    border: 4px solid var(--cor-primaria) !important;
+    object-fit: cover; 
+    width: 100%; 
+    height: auto; 
+    max-width: 15rem; 
+    max-height: 15rem;
+    min-width: 15rem; 
+    min-height: 15rem;
+    border-radius: 50%;
+}

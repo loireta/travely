@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Vampiro+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --cor-primaria: #027368; 
+    --cor-secundaria: #5E4333; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Istok', sans-serif;
+}
+
+.pTexto {
+    text-align: justify;
+    color: #011f1c;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.textBV1 {
+    color: #027368;
+    padding-bottom: 15px;
+    padding-top: 100px;
+}
+
+.textBV2 {
+    color: #027368;
+    padding-bottom: 15px;
+}
+
+.textBV3 {
+    color: #027368;
+    padding-bottom: 15px;
+}
+
+.contatos {
+    padding-top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../static/images/Logo-Travely.png');
+    background-size: cover;
+    opacity: 10%;
+    z-index: -1;
+}
+
+footer {
+    padding-top: 15px;
+}
